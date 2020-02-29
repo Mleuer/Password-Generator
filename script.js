@@ -4,11 +4,12 @@ var lowercaseLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', '
 var uppercaseLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 var totalArray = [];
 
-var passwordLength = window.prompt("How many characters would you like your password to be? (Must be 8-128 characters in length)");
-var containsNumbers = window.confirm("Would You Like Your Password To Contain Numbers?");
-var containsSpecialChars = window.confirm("Would You Like Your Password To Contain Special Characters?");
-var lowercase = window.confirm("Would You Like Your Password To Contain Lower Case Letters?");
-var uppercase = window.confirm("Would You Like Your Password To Contain Upper Case Letters?");
+var passwordLength;
+var containsNumbers;
+var containsSpecialChars;
+var lowercase;
+var uppercase;
+
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
@@ -19,11 +20,17 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-  
+
 }
 
 function generatePassword() {
   var password = "";
+
+  passwordLength = window.prompt("How many characters would you like your password to be? (Must be 8-128 characters in length)");
+  containsNumbers = window.confirm("Would You Like Your Password To Contain Numbers?");
+  containsSpecialChars = window.confirm("Would You Like Your Password To Contain Special Characters?");
+  lowercase = window.confirm("Would You Like Your Password To Contain Lower Case Letters?");
+  uppercase = window.confirm("Would You Like Your Password To Contain Upper Case Letters?");
 
   createTotalArray();
 
@@ -52,7 +59,7 @@ function getRandomElementOfArray(arr) {
 }
 
 function createTotalArray() {
-  if(!containsNumbers && !containsSpecialChars && !lowercaseLetters && !uppercaseLetters) {
+  if (!containsNumbers && !containsSpecialChars && !lowercaseLetters && !uppercaseLetters) {
     alert("INVALID PASSWORD");
   }
   if (containsNumbers) {
@@ -70,24 +77,21 @@ function createTotalArray() {
 }
 
 function makeValidPassword(password) {
-  if(containsNumbers && !numbers.includes(password)) {
+  if (containsNumbers && !numbers.includes(password)) {
     password.concat(getRandomElementOfArray(numbers));
   }
-  if(containsSpecialChars && !specialCharacters.includes(password)) {
+  if (containsSpecialChars && !specialCharacters.includes(password)) {
     password.concat(getRandomElementOfArray(specialCharacters));
   }
-  if(lowercase && !lowercaseLetters.includes(password)) {
+  if (lowercase && !lowercaseLetters.includes(password)) {
     password.concat(getRandomElementOfArray(lowercaseLetters));
   }
-  if(uppercase && !uppercaseLetters.includes(password)) {
+  if (uppercase && !uppercaseLetters.includes(password)) {
     password.concat(getRandomElementOfArray(uppercaseLetters));
   }
-  if(password.length > passwordLength) {
+  if (password.length > passwordLength) {
     password = password.slice(password.length - passwordLength);
   }
   return password;
 }
-
-writePassword();
-
 
